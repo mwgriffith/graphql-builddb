@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+
+  postgres:
+    image: postgres
+    volumes:
+      -  postgresql-volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=rw_dev
+      - POSTGRES_USER=rw_dev
+      - POSTGRES_DB=rw_development
+    ports:
+      - "5432:5432"
+
+volumes:
+    postgresql-volume:
+      external: true
