@@ -1,7 +1,5 @@
-version: '2'
-
+version: '3'
 services:
-
   postgres:
     image: postgres
     volumes:
@@ -12,7 +10,25 @@ services:
       - POSTGRES_DB=rw_development
     ports:
       - "5432:5432"
-
+    # networks:
+    #   - postgres-net
+  pgadmin:
+    image: fenglc/pgadmin4
+    links:
+      - postgres:postgres    
+    environment:
+       - DEFAULT_USER=pgadmin@mail.com
+       - DEFAULT_PASSWORD=mypassword
+    volumes:
+       - postgresql-volume:/root/.pgadmin
+    ports:
+      - "5050:5050"
+    # networks:
+    #   - postgres-net
+    restart: unless-stopped
+# networks:
+#   postgres-net:
+#     driver: bridge
 volumes:
     postgresql-volume:
       external: true
