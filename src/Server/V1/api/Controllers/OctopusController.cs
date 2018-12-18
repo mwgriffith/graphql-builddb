@@ -9,7 +9,8 @@ using Server.api.Models.Octopus;
 
 namespace Server.api.Controllers
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class OctopusController : ControllerBase
     {
