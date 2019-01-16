@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Server.V1.api.Services;
 
 namespace Server
 {
@@ -16,6 +17,9 @@ namespace Server
         {
             services.AddOptions();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //New on injection.
+            services.AddTransient(typeof(IGithubService), typeof(GithubService));
 
             // Add in better error handling.
             services.Configure<ApiBehaviorOptions>(options =>

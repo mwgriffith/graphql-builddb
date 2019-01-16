@@ -149,5 +149,11 @@ namespace Database
         }
         #endregion
 
+
+        #region Public methods
+
+        public DbSet<Entities.Github.Commit> GithubCommits { get; set; }
+
+        #endregion
     }
 }

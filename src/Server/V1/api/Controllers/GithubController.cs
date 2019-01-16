@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Database;
 using Server.api.Models.GitHub;
+using Server.V1.api.Services;
 
 
 namespace Server.api.Controllers
@@ -15,18 +16,24 @@ namespace Server.api.Controllers
     [ApiController]
     public class GithubController : ControllerBase
     {
-        private readonly BuildDBContext _buildDBContext;
+        private readonly IGithubService _githubService;
 
-        public GithubController(BuildDBContext buildDBContext)
+        public GithubController(IGithubService githubService)
         {
-            _buildDBContext = buildDBContext;
+            _githubService = githubService;
         }
 
-        
-        //public async Task<ActionResult> Update([FromBody] GithubPush githubPush)
-        //{
 
-        //}
+        /// <summary>
+        /// takes a github message and handles it.
+        /// </summary>
+        /// <param name="githubPush">The github message sent for the push.</param>
+        /// <returns>An actionresult.</returns>
+        public ActionResult Update([FromBody] GithubPush githubPush)
+        {
+            return _githubService.AddGithubMessage(githubPush);
+        }
 
     }
 }
+
