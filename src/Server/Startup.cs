@@ -17,6 +17,7 @@ namespace Server
         {
             services.AddOptions();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddApiVersioning();
 
             //New on injection.
             services.AddTransient(typeof(IGithubService), typeof(GithubService));
