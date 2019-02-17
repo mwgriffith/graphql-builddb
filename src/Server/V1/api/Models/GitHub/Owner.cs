@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server.api.Models.GitHub
+namespace Server.V1.api.Models.GitHub
 {
     public class Owner
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace Server.api.Models.GitHub
+namespace Server.V1.api.Models.GitHub
 {
     public class Pusher
     {

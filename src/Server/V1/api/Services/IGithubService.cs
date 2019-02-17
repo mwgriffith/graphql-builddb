@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Server.api.Models.GitHub;
+using Server.V1.api.Models.GitHub;
 
 namespace Server.V1.api.Services
 {

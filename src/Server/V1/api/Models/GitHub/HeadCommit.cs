@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace Server.api.Models.GitHub
+namespace Server.V1.api.Models.GitHub
 {
     public class HeadCommit
     {

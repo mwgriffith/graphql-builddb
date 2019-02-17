@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Database;
-using Server.api.Models.GitHub;
+using Server.V1.api.Models.GitHub;
 using Server.V1.api.Services;
 
 
-namespace Server.api.Controllers
+namespace Server.V1.api.Controllers
 {
     [ApiVersion("1.0")]
-    [Route("api/v{version:apiVersion}/[controller]")]
-    [ApiController]
+    [Route("api/v{version:apiVersion}/[controller]/[action]")]
+    [ApiController]    
     public class GithubController : ControllerBase
     {
         private readonly IGithubService _githubService;
@@ -29,6 +29,7 @@ namespace Server.api.Controllers
         /// </summary>
         /// <param name="githubPush">The github message sent for the push.</param>
         /// <returns>An actionresult.</returns>
+        [HttpPost]
         public ActionResult Update([FromBody] GithubPush githubPush)
         {
             return _githubService.AddGithubMessage(githubPush);

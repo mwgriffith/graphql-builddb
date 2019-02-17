@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using Server.V1.api.Services;
 
+[assembly: ApiController]
 namespace Server
 {
     public class Startup
@@ -40,7 +41,7 @@ namespace Server
                     };
                 };
             });
-                        
+
             // Add in the database context.
             services.AddEntityFrameworkNpgsql().AddDbContext<BuildDBContext>();
         }
@@ -53,12 +54,7 @@ namespace Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
-
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseMvc();                        
         }
     }
 }

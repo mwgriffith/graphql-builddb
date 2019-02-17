@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Server.api.Models.Octopus
+namespace Server.V1.api.Models.Octopus
 {
     public class OctopusWebhookInfo
     {

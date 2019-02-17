@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Database;
-using Server.api.Models.Octopus;
+using Server.V1.api.Models.Octopus;
 
-namespace Server.api.Controllers
+namespace Server.V1.api.Controllers
 {
     [ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/[controller]")]
