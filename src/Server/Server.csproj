@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="V1\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

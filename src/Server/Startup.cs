@@ -22,6 +22,7 @@ namespace Server
 
             //New on injection.
             services.AddTransient(typeof(IGithubService), typeof(GithubService));
+            services.AddTransient(typeof(IBitbucketService), typeof(BitbucketService));
 
             // Add in better error handling.
             services.Configure<ApiBehaviorOptions>(options =>

@@ -82,6 +82,7 @@ namespace Database
         private void CreateTables(ModelBuilder modelBuilder)
         {
             Entities.Github.Commit.CreateTable(modelBuilder);
+            Entities.Bitbucket.Push.CreateTable(modelBuilder);
         }
       
 
@@ -93,6 +94,7 @@ namespace Database
         private void AddBoilerPlate(ModelBuilder modelBuilder)
         {
             AddBoilerPlate<Entities.Github.Commit>(modelBuilder);
+            AddBoilerPlate<Entities.Bitbucket.Push>(modelBuilder);
         }
 
 
@@ -153,6 +155,7 @@ namespace Database
         #region Public methods
 
         public DbSet<Entities.Github.Commit> GithubCommits { get; set; }
+        public DbSet<Entities.Bitbucket.Push> BitbucketPushes { get; set; }
 
         #endregion
     }
