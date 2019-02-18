@@ -35,12 +35,15 @@ namespace Database.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnName("modified_at");
 
-                    b.Property<string>("PushMessage");
+                    b.Property<string>("PushMessage")
+                        .IsRequired()
+                        .HasColumnName("pushmessage")
+                        .HasColumnType("jsonb");
 
                     b.HasKey("Id")
-                        .HasName("pk_BitbucketPushes");
+                        .HasName("pk_bitbucketpushes");
 
-                    b.ToTable("BitbucketPushes");
+                    b.ToTable("bitbucket.push");
                 });
 
             modelBuilder.Entity("Database.Entities.Github.Commit", b =>
@@ -51,7 +54,7 @@ namespace Database.Migrations
 
                     b.Property<string>("CommitMessage")
                         .IsRequired()
-                        .HasColumnName("pushmessage")
+                        .HasColumnName("commitmessage")
                         .HasColumnType("jsonb");
 
                     b.Property<DateTime>("CreatedAt")
@@ -64,9 +67,9 @@ namespace Database.Migrations
                         .HasColumnName("modified_at");
 
                     b.HasKey("Id")
-                        .HasName("pk_bitbucket.push");
+                        .HasName("pk_github.commit");
 
-                    b.ToTable("bitbucket.push");
+                    b.ToTable("github.commit");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Database.Migrations
 {
-    public partial class AddedBitbucketpush : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -29,7 +29,7 @@ namespace Database.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BitbucketPushes",
+                name: "github.commit",
                 schema: "builddb",
                 columns: table => new
                 {
@@ -38,11 +38,11 @@ namespace Database.Migrations
                     created_at = table.Column<DateTime>(nullable: false),
                     modified_at = table.Column<DateTime>(nullable: false),
                     deleted_at = table.Column<DateTime>(nullable: true),
-                    PushMessage = table.Column<string>(nullable: true)
+                    commitmessage = table.Column<string>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_BitbucketPushes", x => x.id);
+                    table.PrimaryKey("pk_github.commit", x => x.id);
                 });
         }
 
@@ -53,7 +53,7 @@ namespace Database.Migrations
                 schema: "builddb");
 
             migrationBuilder.DropTable(
-                name: "BitbucketPushes",
+                name: "github.commit",
                 schema: "builddb");
         }
     }

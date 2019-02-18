@@ -1,0 +1,1 @@
+dotnet ef %1 %2 %3 --startup-project ../Server/Server.csproj --context Database.BuildDbContext

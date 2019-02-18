@@ -1,0 +1,1 @@
+Added the dbefcore.bat file for doing dotnet ef core updates.  The batch file takes 1 -3 parameters in to apply migrations and updates through efcore migrations.

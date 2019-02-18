@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Database.Migrations
 {
     [DbContext(typeof(BuildDBContext))]
-    [Migration("20190217220712_AddedBitbucketpush")]
-    partial class AddedBitbucketpush
+    [Migration("20190218141038_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,12 +37,15 @@ namespace Database.Migrations
                     b.Property<DateTime>("ModifiedAt")
                         .HasColumnName("modified_at");
 
-                    b.Property<string>("PushMessage");
+                    b.Property<string>("PushMessage")
+                        .IsRequired()
+                        .HasColumnName("pushmessage")
+                        .HasColumnType("jsonb");
 
                     b.HasKey("Id")
-                        .HasName("pk_BitbucketPushes");
+                        .HasName("pk_bitbucket.push");
 
-                    b.ToTable("BitbucketPushes");
+                    b.ToTable("bitbucket.push");
                 });
 
             modelBuilder.Entity("Database.Entities.Github.Commit", b =>
@@ -53,7 +56,7 @@ namespace Database.Migrations
 
                     b.Property<string>("CommitMessage")
                         .IsRequired()
-                        .HasColumnName("pushmessage")
+                        .HasColumnName("commitmessage")
                         .HasColumnType("jsonb");
 
                     b.Property<DateTime>("CreatedAt")
@@ -66,9 +69,9 @@ namespace Database.Migrations
                         .HasColumnName("modified_at");
 
                     b.HasKey("Id")
-                        .HasName("pk_bitbucket.push");
+                        .HasName("pk_github.commit");
 
-                    b.ToTable("bitbucket.push");
+                    b.ToTable("github.commit");
                 });
 #pragma warning restore 612, 618
         }
