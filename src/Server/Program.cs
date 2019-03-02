@@ -6,43 +6,63 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Database;
+using Serilog;
+
 
 namespace Server
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args).Build();
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Warning()
+                .Enrich.WithProperty("Application", "GraphDBServer")
+                .WriteTo.Console()
+                .CreateLogger();
 
-            using (var scope = host.Services.CreateScope())
+            try
             {
-                var services = scope.ServiceProvider;
-                try
-                {
-                    // ensure mr. database is created or we go nowhere.
-                    var context = services.GetRequiredService<BuildDBContext>();
-                    context.Database.EnsureCreated();
-                }
-                catch (Exception ex)
-                {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError(ex, "An error occurred creating the DB.");                    
-                }
-            }
+                var host = CreateWebHostBuilder(args).Build();
 
-            host.Run();
+                using (var scope = host.Services.CreateScope())
+                {
+                    var services = scope.ServiceProvider;
+                    try
+                    {
+                        // ensure mr. database is created or we go nowhere.
+                        var context = services.GetRequiredService<BuildDBContext>();
+                        context.Database.EnsureCreated();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(ex, "An error occurred creating the DB.");
+                    }
+                }
+
+                host.Run();
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Host terminated unexpectandly");
+                return -1;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
+            
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+            WebHost.CreateDefaultBuilder(args)                
+                .UseSerilog()
                 .UseStartup<Startup>()
                 .ConfigureKestrel((context, options) => 
                 {
-
+                    options.AddServerHeader = false;
                 });
     }
 }
